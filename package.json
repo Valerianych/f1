@@ -1,0 +1,40 @@
+{
+  "scripts": {
+    "dev": "concurrently \"vite --host 0.0.0.0\" \"tsx server/index.ts\"",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "server": "tsx server/index.ts"
+  },
+  "dependencies": {
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "recharts": "latest",
+    "typescript": "latest",
+    "uuid": "latest",
+    "vite": "^6.0.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/cors": "latest",
+    "@types/express": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "latest",
+    "concurrently": "latest",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "latest",
+    "eslint-plugin-react-refresh": "latest",
+    "postcss": "latest",
+    "tailwindcss": "^3.4.17",
+    "tsx": "latest",
+    "typescript-eslint": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

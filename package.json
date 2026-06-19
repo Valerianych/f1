@@ -1,9 +1,10 @@
 {
   "scripts": {
     "dev": "concurrently \"vite --host 0.0.0.0\" \"tsx server/index.ts\"",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint .",
-    "server": "tsx server/index.ts"
+    "server": "tsx server/index.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "cors": "latest",

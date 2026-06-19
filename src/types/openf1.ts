@@ -1,0 +1,14 @@
+export type Meeting={meeting_key:number;meeting_name:string;meeting_official_name?:string;country_name:string;country_flag?:string;location:string;date_start:string;date_end:string;gmt_offset:string;is_cancelled:boolean};
+export type Session={session_key:number;meeting_key:number;session_name:string;session_type:string;circuit_short_name:string;country_name:string;location:string;date_start:string;date_end:string;year:number};
+export type Driver={driver_number:number;full_name:string;first_name?:string;last_name?:string;broadcast_name?:string;name_acronym?:string;team_name:string;team_colour?:string;headshot_url?:string};
+export type SessionResult={position:number;driver_number:number;gap_to_leader:number|string|null;duration:number|number[]|null;number_of_laps:number;dnf:boolean;dns:boolean;dsq:boolean};
+export type Lap={driver_number:number;lap_number:number;lap_duration:number|null;duration_sector_1?:number|null;duration_sector_2?:number|null;duration_sector_3?:number|null;i1_speed?:number|null;i2_speed?:number|null;st_speed?:number|null;is_pit_out_lap?:boolean;date_start?:string};
+export type PitStop={driver_number:number;lap_number:number;date:string;lane_duration?:number|null;stop_duration?:number|null};
+export type Stint={driver_number:number;stint_number:number;compound:string;lap_start:number;lap_end:number;tyre_age_at_start:number};
+export type RaceControlEvent={category?:string;date:string;driver_number?:number|null;flag?:string|null;lap_number?:number|null;message:string;scope?:string;sector?:number|null};
+export type LocationPoint={driver_number:number;date:string;x:number;y:number;z:number};
+export type PositionPoint={driver_number:number;date:string;position:number};
+export type WeatherPoint={date:string;air_temperature?:number;track_temperature?:number;humidity?:number;pressure?:number;rainfall?:number;wind_direction?:number;wind_speed?:number};
+export type Overtake={date:string;overtaking_driver_number:number;overtaken_driver_number:number;position?:number};
+export type DriverIssue={driver_number:number;type:'penalty'|'incident'|'slow_pit'|'position_loss'|'dnf'|'dns'|'dsq'|'bad_lap';severity:'low'|'medium'|'high';lap_number?:number;message:string;source:'race_control'|'calculated'};
+export type DriverResult=Driver&{result?:SessionResult;bestLap?:number|null;avgLap?:number|null;pitCount:number;issues:DriverIssue[]};

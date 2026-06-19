@@ -1,0 +1,12 @@
+import type {Driver, Lap, LocationPoint, PitStop, SessionResult, Stint} from '../types/openf1';
+const nums=(a:(number|null|undefined)[])=>a.filter((x):x is number=>typeof x==='number'&&Number.isFinite(x));
+export const average=(a:number[])=>a.length?a.reduce((s,x)=>s+x,0)/a.length:null;
+export const median=(a:number[])=>{const b=[...a].sort((x,y)=>x-y);return b.length?b[Math.floor(b.length/2)]:null};
+export const bestLap=(laps:Lap[])=>{const v=nums(laps.map(l=>l.lap_duration));return v.length?Math.min(...v):null};
+export const avgLap=(laps:Lap[])=>{const v=nums(laps.filter(l=>!l.is_pit_out_lap).map(l=>l.lap_duration));if(!v.length)return null;const med=median(v)??0;return average(v.filter(x=>x<med*1.25))};
+export const slowestLap=(laps:Lap[])=>{const v=nums(laps.map(l=>l.lap_duration));return v.length?Math.max(...v):null};
+export const pitDuration=(p:PitStop)=>p.stop_duration??p.lane_duration??null;
+export const mergeResults=(drivers:Driver[],results:SessionResult[])=>results.map(result=>({...drivers.find(d=>d.driver_number===result.driver_number),driver_number:result.driver_number,full_name:drivers.find(d=>d.driver_number===result.driver_number)?.full_name??`#${result.driver_number}`,team_name:drivers.find(d=>d.driver_number===result.driver_number)?.team_name??'—',result}));
+export const normalizeTrack=(points:LocationPoint[],w=900,h=420)=>{const xs=points.map(p=>p.x),ys=points.map(p=>p.y);const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);return points.map(p=>({...p,sx:40+((p.x-minX)/(maxX-minX||1))*(w-80),sy:40+((p.y-minY)/(maxY-minY||1))*(h-80)}));};
+export const tyreColor=(c:string)=>({SOFT:'#ef4444',MEDIUM:'#facc15',HARD:'#f8fafc',INTERMEDIATE:'#22c55e',WET:'#3b82f6'}[c]??'#94a3b8');
+export const stintWidth=(s:Stint,max:number)=>`${Math.max(4,((s.lap_end-s.lap_start+1)/Math.max(max,1))*100)}%`;
